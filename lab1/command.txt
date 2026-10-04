@@ -1,1 +1,0 @@
-cd ~/Informatics/Numerical_Methods_MAI/build && ./bin/lab1

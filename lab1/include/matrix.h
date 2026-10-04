@@ -12,15 +12,15 @@
 using Matrix = std::vector<std::vector<double>>;
 using Vector = std::vector<double>;
 
-Matrix Multiply_Matrix(const Matrix& A, const Matrix& B);
+Matrix Multiply_Matrix(const Matrix &A, const Matrix &B);
 
-void Print_Matrix(const Matrix& A);
+void Print_Matrix(const Matrix &A);
 
-void Print_Vector(const Vector& V);
+void Print_Vector(const Vector &V);
 
-bool Equal_Matrix(const Matrix& A, const Matrix& B);
+bool Equal_Matrix(const Matrix &A, const Matrix &B);
 
-Vector Multiply_Vector(const Matrix& A, const std::vector<double>& V);
+Vector Multiply_Vector(const Matrix &A, const std::vector<double> &V);
 
 std::string To_Mixed_Fraction(double val, double eps, int max_den);
 

@@ -1,7 +1,12 @@
 add_executable(lab1
     main.cpp
-    src/functions.cpp
     src/matrix.cpp
+    src/file_io.cpp
+    src/lu_decomposition.cpp
+    src/tridiagonal_sweep.cpp
+    src/iterative_methods.cpp
+    src/jacobi_eigen.cpp
+    src/qr_decomposition.cpp
 )
 
 target_include_directories(lab1
