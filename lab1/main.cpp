@@ -1,8 +1,7 @@
 #include <iostream>
 #include <string>
-#include <cstdlib> // Для вызова Python скрипта через system()
+#include <cstdlib>
 
-// Подключаем все наши модули
 #include "lu_decomposition.h"
 #include "tridiagonal_sweep.h"
 #include "iterative_methods.h"
@@ -53,7 +52,6 @@ int main()
             break;
         case 6:
             std::cout << "Запуск скрипта check_complex.py...\n\n";
-            // В зависимости от системы, команда может быть "python", "python3" или "py"
             std::system("python lab1/check_complex.py");
             break;
         case 0:

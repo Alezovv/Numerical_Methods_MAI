@@ -49,7 +49,7 @@ void Solve_Task_1_4(const std::string &filename)
     }
     file.close();
 
-    Matrix A_orig = A; // Сохраняем исходную матрицу для проверки в конце
+    Matrix A_orig = A;
 
     // Матрица собственных векторов (изначально единичная)
     Matrix V(n, Vector(n, 0.0));
@@ -100,7 +100,7 @@ void Solve_Task_1_4(const std::string &filename)
 
         A[i_max][i_max] = c * c * aii + 2.0 * s * c * aij + s * s * ajj;
         A[j_max][j_max] = s * s * aii - 2.0 * s * c * aij + c * c * ajj;
-        A[i_max][j_max] = A[j_max][i_max] = 0.0; // Принудительно зануляем
+        A[i_max][j_max] = A[j_max][i_max] = 0.0;
 
         // Обновляем матрицу собственных векторов V
         for (size_t k = 0; k < n; ++k)
@@ -112,7 +112,6 @@ void Solve_Task_1_4(const std::string &filename)
         }
     }
 
-    // ВЫВОД РЕЗУЛЬТАТОВ (По ТЗ)
     std::cout << "1. Заданная точность вычислений (eps): " << eps << "\n\n";
 
     std::cout << "2. Найденные собственные значения (Lambda):\n";
@@ -165,13 +164,11 @@ void Solve_Task_1_4(const std::string &filename)
         std::cout << '\n';
     }
 
-    // Собственная проверка на равенство с небольшим допуском
     bool passed = true;
     for (size_t i = 0; i < n; ++i)
     {
         for (size_t j = 0; j < n; ++j)
         {
-            // Используем eps из ввода, немного расширив коридор погрешности
             if (std::abs(AV[i][j] - VLambda[i][j]) > eps * 10.0)
                 passed = false;
         }

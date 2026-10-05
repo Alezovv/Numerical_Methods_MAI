@@ -145,8 +145,7 @@ double Determinant(const Matrix &U, size_t count_perm)
 void Solve_Task_1_1(const std::string &filename)
 {
     std::cout << "--- Запуск Лабораторной 1.1 (LU-разложение) ---\n";
-
-    // 1. Чтение данных из файла
+    
     std::ifstream file(filename);
     if (!file.is_open())
     {
@@ -155,7 +154,7 @@ void Solve_Task_1_1(const std::string &filename)
     }
 
     size_t n;
-    file >> n; // Считываем размерность
+    file >> n;
 
     Matrix A(n, Vector(n));
     for (size_t i = 0; i < n; ++i)
@@ -172,8 +171,7 @@ void Solve_Task_1_1(const std::string &filename)
         file >> b[i];
     }
     file.close();
-
-    // 2. Выполнение алгоритма (ваш бывший Print_Result)
+    
     Matrix P, L, U;
     size_t count_perm = luDecomposition(A, P, L, U);
 

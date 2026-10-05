@@ -15,7 +15,7 @@ double Vector_Norm(const Vector &v1, const Vector &v2)
     return max_diff;
 }
 
-// Эталонное решение методом Гаусса (для проверки результатов)
+// Эталонное решение методом Гаусса
 Vector Gauss_Exact_Solution(Matrix A, Vector b)
 {
     size_t n = A.size();
@@ -63,7 +63,7 @@ void Solve_Task_1_3(const std::string &filename)
 
     size_t n;
     double eps;
-    file >> n >> eps; // Читаем размерность и точность эпсилон
+    file >> n >> eps;
 
     Matrix A(n, Vector(n));
     Vector b(n);
@@ -79,8 +79,7 @@ void Solve_Task_1_3(const std::string &filename)
         file >> b[i];
     }
     file.close();
-
-    // 1. Вывод заданной точности (Требование 1)
+    
     std::cout << "1. Заданная точность вычислений (eps): " << eps << "\n\n";
 
     // Приведение к эквивалентному виду x = alpha * x + beta
@@ -143,8 +142,7 @@ void Solve_Task_1_3(const std::string &filename)
 
     // Эталонное решение
     Vector exact_x = Gauss_Exact_Solution(A, b);
-
-    // ВЫВОД РЕЗУЛЬТАТОВ
+    
     std::cout << "--- Решение методом простых итераций ---\n";
     std::cout << "Вектор решения x:\n";
     Print_Vector(x_simple);
