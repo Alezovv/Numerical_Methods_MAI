@@ -115,7 +115,7 @@ void Solve_Task_1_5(const std::string &filename)
     {
         Matrix Qk, Rk;
         Perform_QR(Ak, Qk, Rk);
-        Ak = Multiply_Matrix(Rk, Qk); // A_{k+1} = R_k * Q_k
+        Ak = Multiply_Matrix(Rk, Qk); // A_k+1 = R_k * Q_k
 
         // Проверка сходимости (поддиагональные элементы стремятся к нулю)
         double max_subdiag = 0.0;
