@@ -1,10 +1,13 @@
 #include <iostream>
 #include <string>
+#include <windows.h>
 #include "nonlinear_equations.h"
 
 int main()
 {
-    const std::string PATH_PREFIX = "lab2/data/";
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
+    const std::string PATH_PREFIX = "data/lab2/";
     int choice = -1;
 
     while (choice != 0)
@@ -18,7 +21,10 @@ int main()
         std::cout << "========================================\n";
         std::cout << "Выберите задание (0-2): ";
 
-        std::cin >> choice;
+        if (!(std::cin >> choice))
+        {
+            break;
+        }
         std::cout << "\n";
 
         switch (choice)
