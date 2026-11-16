@@ -479,6 +479,24 @@ void Solve_Task_4_1(const std::string &filename)
         }
         csv.close();
     }
+
+    std::ofstream csv_h2("data/lab4/plot_4_1_h2.csv");
+    if (csv_h2.is_open())
+    {
+        int N2 = static_cast<int>(euler_h2.x.size());
+        csv_h2 << "x,exact,euler,rk4,adams\n";
+        for (int i = 0; i < N2; ++i)
+        {
+            double xk = euler_h2.x[i];
+            double ex = Task41::ExactY(xk);
+            double ye = euler_h2.y[i];
+            double yr = rk4_h2.y[i];
+            double ya = adams_h2.y[i];
+            csv_h2 << std::fixed << std::setprecision(6) << xk << ","
+                   << ex << "," << ye << "," << yr << "," << ya << "\n";
+        }
+        csv_h2.close();
+    }
 }
 
 void Solve_Task_4_2(const std::string &filename)
@@ -607,5 +625,22 @@ void Solve_Task_4_2(const std::string &filename)
                 << std::abs(yf - ex) << "\n";
         }
         csv.close();
+    }
+
+    std::ofstream csv_h2("data/lab4/plot_4_2_h2.csv");
+    if (csv_h2.is_open())
+    {
+        int N2 = static_cast<int>(shoot_h2.x.size());
+        csv_h2 << "x,exact,shoot,fd\n";
+        for (int i = 0; i < N2; ++i)
+        {
+            double xi = shoot_h2.x[i];
+            double ex = Task42::ExactY(xi);
+            double ys = shoot_h2.y[i];
+            double yf = fd_h2.y[i];
+            csv_h2 << std::fixed << std::setprecision(6) << xi << ","
+                   << ex << "," << ys << "," << yf << "\n";
+        }
+        csv_h2.close();
     }
 }

@@ -5,7 +5,6 @@
 #include <iomanip>
 #include <string>
 
-// Интегрируемая функция
 double f(double x)
 {
     return 1.0 / (3.0 * x * x + 4.0 * x + 2.0);
@@ -69,8 +68,8 @@ double simpson(double a, double b, double h)
 void print_row(const std::string &name, double I_h1, double I_h2, int p, double exact)
 {
     double I_rr = I_h2 + (I_h2 - I_h1) / (std::pow(2, p) - 1.0);
-    double err_h2 = std::abs(I_rr - I_h2);   // Оценка погрешности
-    double abs_err = std::abs(exact - I_h2); // Фактическая абсолютная погрешность
+    double err_h2 = std::abs(I_rr - I_h2);
+    double abs_err = std::abs(exact - I_h2);
 
     std::cout << std::left << std::setw(20) << name
               << std::right << std::setw(12) << I_h1
@@ -100,8 +99,8 @@ void Solve_Task_3_5()
               << std::setw(15) << "Абс. погрешн.\n";
     std::cout << std::string(94, '-') << "\n";
 
-    print_row("Левые прямоуг.", rect_left(a, b, h1), rect_left(a, b, h2), 2, exact);
-    print_row("Правые прямоуг.", rect_right(a, b, h1), rect_right(a, b, h2), 2, exact);
+    print_row("Левые прямоуг.", rect_left(a, b, h1), rect_left(a, b, h2), 1, exact);
+    print_row("Правые прямоуг.", rect_right(a, b, h1), rect_right(a, b, h2), 1, exact);
     print_row("Средние прямоуг.", rect_mid(a, b, h1), rect_mid(a, b, h2), 2, exact);
     print_row("Трапеции", trapezoidal(a, b, h1), trapezoidal(a, b, h2), 2, exact);
     print_row("Симпсон", simpson(a, b, h1), simpson(a, b, h2), 4, exact);

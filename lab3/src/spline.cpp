@@ -31,12 +31,17 @@ void Solve_Task_3_2(const std::string &filename)
     file >> x_star;
     file.close();
 
-    int intervals = n - 1;
+    std::cout << "1. Исходные узлы:\n";
+    for (int i = 0; i < n; i++)
+    {
+        std::cout << "x[" << i << "] = " << std::setw(6) << x[i] << ", y[" << i << "] = " << y[i] << "\n";
+    }
+    std::cout << "\n";
     std::vector<double> h(n);
     for (int i = 1; i < n; i++)
         h[i] = x[i] - x[i - 1];
 
-    // Инициализация СЛАУ для коэффициентов c_i
+    // СЛАУЦ
     std::vector<double> A(n - 1, 0.0), B(n - 1, 0.0), C(n - 1, 0.0), D(n - 1, 0.0);
     for (int i = 1; i < n - 1; i++)
     {
@@ -46,7 +51,7 @@ void Solve_Task_3_2(const std::string &filename)
         D[i] = 3.0 * ((y[i + 1] - y[i]) / h[i + 1] - (y[i] - y[i - 1]) / h[i]);
     }
 
-    // Метод прогонки
+    // Метод прогонки, тк диаг преобл
     std::vector<double> P(n - 1, 0.0), Q(n - 1, 0.0), c(n, 0.0);
     P[1] = -C[1] / B[1];
     Q[1] = D[1] / B[1];
@@ -60,9 +65,8 @@ void Solve_Task_3_2(const std::string &filename)
     {
         c[i] = P[i] * c[i + 1] + Q[i];
     }
-    // Естественные граничные условия: c[0] = 0, c[n-1] = 0
 
-    // Расчет a, b, d
+    // граничные условия c[0] = 0, c[n-1] = 0
     std::vector<SplineTuple> splines(n);
     for (int i = 1; i < n; i++)
     {
@@ -73,7 +77,6 @@ void Solve_Task_3_2(const std::string &filename)
         splines[i].x = x[i];
     }
 
-    // 1-3. Вывод коэффициентов и участков
     std::cout << "Коэффициенты сплайна на интервалах:\n";
     std::cout << std::setw(15) << "Интервал" << " | "
               << std::setw(10) << "a" << " | "
@@ -91,7 +94,6 @@ void Solve_Task_3_2(const std::string &filename)
                   << std::setw(10) << splines[i].d << "\n";
     }
 
-    // 4-5. Поиск интервала и значения в x*
     int target_interval = 1;
     for (int i = 1; i < n; i++)
     {
@@ -102,22 +104,21 @@ void Solve_Task_3_2(const std::string &filename)
         }
     }
     double dx = x_star - splines[target_interval].x;
+    // знач полинма
     double s_star = splines[target_interval].a + splines[target_interval].b * dx +
                     splines[target_interval].c * dx * dx + splines[target_interval].d * dx * dx * dx;
 
     std::cout << "\nТочка x* = " << x_star << " попадает в интервал " << target_interval << "\n";
     std::cout << "S(x*) = " << s_star << "\n";
 
-    // 6. Проверка прохождения через узлы
     std::cout << "\nПроверка узлов (S(x_i) == y_i):\n";
     for (int i = 1; i < n; i++)
     {
-        double dx_node = x[i] - splines[i].x; // = 0
+        double dx_node = x[i] - splines[i].x;
         double s_node = splines[i].a + splines[i].b * dx_node + splines[i].c * dx_node * dx_node + splines[i].d * dx_node * dx_node * dx_node;
         std::cout << "Узел " << i << ": S(" << x[i] << ") = " << s_node << " (Факт: " << y[i] << ")\n";
     }
 
-    // 7. Проверка второй производной на концах S''(x) = 2c + 6d(x - x_i)
     double S_prime2_start = 2.0 * splines[1].c + 6.0 * splines[1].d * (x[0] - splines[1].x);
     double S_prime2_end = 2.0 * splines[n - 1].c + 6.0 * splines[n - 1].d * (x[n - 1] - splines[n - 1].x); // dx = 0, остается 2c
 
@@ -125,7 +126,6 @@ void Solve_Task_3_2(const std::string &filename)
     std::cout << "S''(x_0) = " << S_prime2_start << " (Ожидается 0)\n";
     std::cout << "S''(x_n) = " << S_prime2_end << " (Ожидается 0)\n";
 
-    // Экспорт для графика
     std::ofstream csv("data/lab3/plot_3_2.csv");
     csv << "x,S\n";
     for (int i = 1; i < n; i++)

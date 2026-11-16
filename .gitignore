@@ -43,3 +43,7 @@ desktop.ini
 *.dSYM/
 *.pdb
 *.ilk
+
+# Python
+__pycache__/
+*.py[cod]

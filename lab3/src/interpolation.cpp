@@ -9,11 +9,10 @@
 double exact_function(double x)
 {
     if (x < 0)
-        return 0.0; // Защита от корня из отрицательного числа при отрисовке левого края
+        return 0.0;
     return std::sqrt(x);
 }
 
-// Форматирование чисел для красивого вывода многочленов
 std::string fmt(double val)
 {
     std::ostringstream out;
@@ -139,18 +138,18 @@ void Solve_Task_3_1(const std::string &filename)
     file >> x_star;
     file.close();
 
-    // 1. Исходные узлы
+    // Исходные узлы
     std::cout << "1. Исходные узлы:\n";
     for (int i = 0; i < n; i++)
     {
         std::cout << "x[" << i << "] = " << std::setw(6) << x[i] << ", y[" << i << "] = " << y[i] << "\n";
     }
 
-    // 2. Многочлен Лагранжа
+    // Многочлен Лагранжа
     std::cout << "\n2. Многочлен Лагранжа:\n"
               << build_lagrange_string(x, y) << "\n";
 
-    // 3. Таблица разделенных разностей
+    // Таблица разделенных разностей
     auto diff_table = calc_divided_differences(x, y);
     std::cout << "\n3. Таблица разделенных разностей:\n";
     for (int i = 0; i < n; i++)
@@ -162,11 +161,11 @@ void Solve_Task_3_1(const std::string &filename)
         std::cout << "\n";
     }
 
-    // 4. Многочлен Ньютона
+    // Многочлен Ньютона
     std::cout << "\n4. Многочлен Ньютона:\n"
               << build_newton_string(x, diff_table) << "\n";
 
-    // 5-9. Расчеты в точке x*
+    // Расчеты в точке x*
     double lagrange_val = calc_lagrange(x, y, x_star);
     double newton_val = calc_newton(x, diff_table, x_star);
     double exact_val = exact_function(x_star);

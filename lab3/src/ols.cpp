@@ -5,7 +5,7 @@
 #include <cmath>
 #include <iomanip>
 
-// Локальная функция для решения СЛАУ методом Гаусса
+// функция для СЛАУ
 std::vector<double> solve_gauss(std::vector<std::vector<double>> A, std::vector<double> B)
 {
     int n = A.size();
